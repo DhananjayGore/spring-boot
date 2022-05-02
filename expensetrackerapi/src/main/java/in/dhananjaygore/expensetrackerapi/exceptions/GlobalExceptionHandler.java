@@ -61,7 +61,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
 		Map<String, Object> body = new HashMap<>();
 		
-		
 		body.put("statusCode", HttpStatus.BAD_REQUEST.value());
 		
 		List<String> errors = ex.getBindingResult()
@@ -74,5 +73,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		return new ResponseEntity<Object>(body, HttpStatus.BAD_REQUEST);
 		
+	}
+	
+	@ExceptionHandler(ItemAlreadyExistException.class)
+	public ResponseEntity<ErrorObject> handleItemExistException(ItemAlreadyExistException ex, WebRequest request){
+		
+		ErrorObject eObject = new ErrorObject();
+		eObject.setStatusCode(HttpStatus.CONFLICT.value());
+		eObject.setMessage(ex.getMessage());
+		eObject.setTimeStamp(new Date());
+		return new ResponseEntity<ErrorObject>(eObject, HttpStatus.CONFLICT);
 	}
 }
