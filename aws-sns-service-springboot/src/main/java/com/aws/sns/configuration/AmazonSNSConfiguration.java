@@ -13,6 +13,8 @@ import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 @Configuration
 public class AmazonSNSConfiguration {
 	
+	
+	// removed accesskeyID and secretAccessKey for security concerns 
 	@Primary
 	@Bean
 	public AmazonSNSClient amazonSNSClient() {
@@ -22,8 +24,8 @@ public class AmazonSNSConfiguration {
 				.withCredentials(
 						new AWSStaticCredentialsProvider(
 								new BasicAWSCredentials(
-										"AKIAVHCXJOQKT3MMCADO", 
-										"CA1WGM3Ra492kn1mleA2i088suU9Lgo1pekMuE2R"
+										"Access_key_ID", 
+										"Secret access key"
 										)
 						)
 				).
